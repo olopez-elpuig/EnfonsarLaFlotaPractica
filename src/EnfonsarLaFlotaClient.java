@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.net.*;
 import java.util.Scanner;
 
+//Client
 public class EnfonsarLaFlotaClient {
 
     char[][] tablero = new char[10][10];

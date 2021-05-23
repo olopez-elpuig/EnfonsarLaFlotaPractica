@@ -3,13 +3,13 @@ import java.net.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
+//Servidor
 public class EnfonsarLaFlotaServidor {
 
     char[][] tauler = new char[10][10];
     char[][] taulerJ1 = new char[10][10];
     char[][] taulerJ2 = new char[10][10];
 
-    //Info NET
     int port = 5557;
     DatagramSocket socket;
     InetAddress inetAddress;
