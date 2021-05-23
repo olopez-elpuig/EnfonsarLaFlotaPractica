@@ -162,76 +162,7 @@ public class EnfonsarLaFlotaServidor {
 
     }
 
-    public void juegoSingle() {
 
-        try {
-
-            DatagramPacket packet;
-
-            inetAddress = InetAddress.getByName(srvIp);
-
-            byte[] msgRecibir = new byte[1024];
-            byte[] msgEnviar = new byte[1024];
-            String stringRecibir;
-            String resultado;
-
-            msgEnviar = new String("start").getBytes();
-            packet = new DatagramPacket(msgEnviar, msgEnviar.length, inetAddressJ1, portJ1);
-            socket.send(packet);
-            System.out.println("Se empieza el juego");
-
-            while (jugant) {
-                msgEnviar = new String("turn").getBytes();
-                packet = new DatagramPacket(msgEnviar, msgEnviar.length, inetAddressJ1, portJ1);
-                socket.send(packet);
-
-                packet = new DatagramPacket(msgRecibir, msgRecibir.length);
-                socket.receive(packet);
-
-                stringRecibir = new String(packet.getData(), 0, packet.getLength());
-                resultado = comprobarCoords(stringRecibir);
-
-                msgEnviar = new String(resultado).getBytes();
-                packet = new DatagramPacket(msgEnviar, msgEnviar.length, inetAddressJ1, portJ1);
-                socket.send(packet);
-
-                jugant = false;
-                for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        if (tauler[i][j] != '·') {
-                            jugant = true;
-                        }
-                    }
-                }
-
-                if (!jugant) {
-                    String enviarMensaje = "Fin del joc! Jugador 1: " + puntsJ1 + " punts ; Jugador 2: " + puntsJ2 + " punts.";
-                    msgEnviar = new String(enviarMensaje).getBytes();
-                    packet = new DatagramPacket(msgEnviar, msgEnviar.length, inetAddressJ1, portJ1);
-                    socket.send(packet);
-                    break;
-                }
-
-                if (turn == 1) {
-                    turn = 2;
-                } else if (turn == 2) {
-                    turn = 1;
-                }
-
-
-
-
-
-
-            }
-
-
-        } catch (IOException e) {
-        }
-
-
-
-    }
 
     private String comprobarCoords(String coordenadas) {
 
@@ -349,9 +280,7 @@ public class EnfonsarLaFlotaServidor {
 
         enfonsarLaFlotaServidor.lobby();
 
-        if (enfonsarLaFlotaServidor.jugadores == 1) {
-            enfonsarLaFlotaServidor.juegoSingle();
-        } else if (enfonsarLaFlotaServidor.jugadores == 2) {
+        if (enfonsarLaFlotaServidor.jugadores == 2) {
             enfonsarLaFlotaServidor.jocCoop();
         }
 
