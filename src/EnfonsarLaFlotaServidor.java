@@ -36,7 +36,6 @@ public class EnfonsarLaFlotaServidor {
 
             while (jugadores < 2) {
                 socket.receive(packet);
-                //Bienvenido tal cual sout
 
                 //guarda IP jugador
                 jugadores++;
